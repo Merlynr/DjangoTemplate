@@ -2,7 +2,7 @@ from django.http import HttpResponse
 from django.shortcuts import render, get_object_or_404
 from django.template.context_processors import csrf
 
-from polls.models import Question
+from polls.models import Question, Records
 
 
 # Create your views here.
@@ -48,15 +48,17 @@ def do_form_action(request):
     return HttpResponse(res)
 
 
+# post处理表单，并储存读取数据库
 def investigate(request):
     ctx = {}
     ctx.update(csrf(request))
     if request.POST:
-        ctx['res'] = request.POST['staff']
-        new_record = Question(question_text=ctx)
+        res = request.POST['staff']
+        new_record = Records(records=res)
+        res = ""
         new_record.save()
-    ctx={}
-    ctx.update(csrf(request))
-    all_records=Question.objects.all()
-    ctx['staff']=all_records
+
+    all_records = Records.objects.all()
+    ctx['staff'] = all_records
+
     return render(request, "polls/postBase.html", ctx)

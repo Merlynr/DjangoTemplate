@@ -17,4 +17,4 @@ class Choice(models.Model):
 
 
 class Records(models.Model):
-    records = models.CharField(max_length=200)
+    records = models.CharField(max_length=800)
