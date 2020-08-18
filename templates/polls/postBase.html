@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>PostBase</title>
+</head>
+<body>
+<form action="/polls/postForm" method="post">
+     {% csrf_token %}
+  <input type="text" name="staff">
+  <input type="submit" value="Submit">
+</form>
+
+<p>{{ res }}</p>
+</body>
+</html>

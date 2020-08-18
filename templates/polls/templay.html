@@ -5,6 +5,19 @@
     <title>Title</title>
 </head>
 <body>
-<h1>{{ label }}</h1>
+HHHH
+{#<h1>{{ label }}</h1>#}
+{% extends "polls/base.html" %}
+CCCCCCCCCCC
+{% block mainbody %}
+{% for item in staffs %}
+    <p>
+        {{ item.id }}, {{ item.question_text }}---{{ item.nums }}
+    </p>
+{% endfor %}
+
+
+
+{% endblock %}
 </body>
 </html>

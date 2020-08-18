@@ -1,5 +1,6 @@
 from django.http import HttpResponse
 from django.shortcuts import render, get_object_or_404
+from django.template.context_processors import csrf
 
 from polls.models import Question
 
@@ -31,3 +32,26 @@ def results(request, question_id):
 
 def vote(request, question_id):
     return HttpResponse("You're voting on question %s." % question_id)
+
+
+def staff(request):
+    staff_list = Question.objects.all()
+    # staff_str = map(str, staff_list)
+    # context = {'label': " ".join(staff_str)}
+    return render(request, 'polls/templay.html', {'staffs': staff_list})
+
+
+# form表单处理
+def do_form_action(request):
+    res = request.GET['staffs']
+    print(res)
+    return HttpResponse(res)
+
+
+def investigate(request):
+    ctx = {}
+    ctx.update(csrf(request))
+    print("POSTPOSTPOST")
+    if request.POST:
+        ctx['res'] = request.POST['staff']
+    return render(request, "polls/postBase.html", ctx)
