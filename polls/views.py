@@ -51,7 +51,12 @@ def do_form_action(request):
 def investigate(request):
     ctx = {}
     ctx.update(csrf(request))
-    print("POSTPOSTPOST")
     if request.POST:
         ctx['res'] = request.POST['staff']
+        new_record = Question(question_text=ctx)
+        new_record.save()
+    ctx={}
+    ctx.update(csrf(request))
+    all_records=Question.objects.all()
+    ctx['staff']=all_records
     return render(request, "polls/postBase.html", ctx)

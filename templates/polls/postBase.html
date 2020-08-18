@@ -11,6 +11,8 @@
   <input type="submit" value="Submit">
 </form>
 
-<p>{{ res }}</p>
+{% for s in staff %}
+<p>{{ s }}</p>
+{%  endfor %}
 </body>
 </html>
